@@ -5,6 +5,14 @@ applyTo: '**/*.cs, **/*.json'
 
 # ASP.NET REST API Development
 
+## API Conventions
+
+- Route pattern: `api/v1/[controller]` (versioned, lowercase plural noun)
+- All endpoints return `ApiResponse<T>` or `ApiResponse<IReadOnlyCollection<T>>`
+- Swagger annotations: `[SwaggerOperation(Summary = "...")]` on each action
+- Async actions with `CancellationToken` parameter
+- `[ApiController]` attribute on all controllers
+
 ## Instruction
 - Guide users through building their first REST API using ASP.NET Core 10.
 - Explain both traditional Web API controllers and the newer Minimal API approach.
