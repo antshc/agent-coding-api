@@ -8,20 +8,12 @@ using Features.Common;
 
 namespace Features;
 
-internal class Managing_users_steps : Base_api_steps, IDisposable
+internal class Managing_users_steps(TestWebApplicationFactory app) : Base_api_steps, IDisposable
 {
-    private readonly IUsersClient _client;
-    private State<Guid> _accountId;
+    private readonly IUsersClient _client = app.UsersClient;
     private State<Guid> _orderId;
 
-    public Managing_users_steps(
-        TestWebApplicationFactory app)
-    {
-        _client = app.UsersClient;
-        App = app;
-    }
-
-    public TestWebApplicationFactory App { get; }
+    public TestWebApplicationFactory App { get; } = app;
 
     public Task Given_not_exist_user_with_id_USERID(Guid userId)
     {

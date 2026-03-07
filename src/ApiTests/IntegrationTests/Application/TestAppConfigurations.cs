@@ -3,13 +3,8 @@ using ApiTests.IntegrationTests.Application.Infrastructure;
 
 namespace ApiTests.IntegrationTests.Application;
 
-public class FeatureTestAppConfigurations : TestAppConfigurations
+public class FeatureTestAppConfigurations(MsSqlDbContainerMock dbContainerFixtureMock) : TestAppConfigurations(dbContainerFixtureMock)
 {
-    public FeatureTestAppConfigurations(MsSqlDbContainerMock dbContainerFixtureMock)
-        : base(dbContainerFixtureMock)
-    {
-    }
-
     public override IDictionary<string, string> Get()
     {
         var configs = base.Get();
@@ -19,12 +14,8 @@ public class FeatureTestAppConfigurations : TestAppConfigurations
     }
 }
 
-public class TestAppConfigurations
+public class TestAppConfigurations(MsSqlDbContainerMock dbContainerFixtureMock)
 {
-    private readonly MsSqlDbContainerMock _dbContainerFixtureMock;
-
-    public TestAppConfigurations(MsSqlDbContainerMock dbContainerFixtureMock) => _dbContainerFixtureMock = dbContainerFixtureMock;
-
     public virtual IDictionary<string, string> Get()
-        => new Dictionary<string, string>() { { "ConnectionStrings:DefaultConnection", _dbContainerFixtureMock.DbConnectionString } };
+        => new Dictionary<string, string>() { { "ConnectionStrings:DefaultConnection", dbContainerFixtureMock.DbConnectionString } };
 }

@@ -10,13 +10,8 @@ using Newtonsoft.Json;
 
 namespace ApiTests.IntegrationTests.LightBDD;
 
-public class HttpRequestLogAsCommentDelegatingHandler : DelegatingHandler
+public class HttpRequestLogAsCommentDelegatingHandler(ILogger<HttpRequestLogAsCommentDelegatingHandler> logger) : DelegatingHandler
 {
-    private readonly ILogger<HttpRequestLogAsCommentDelegatingHandler> _logger;
-
-    public HttpRequestLogAsCommentDelegatingHandler(ILogger<HttpRequestLogAsCommentDelegatingHandler> logger)
-        => _logger = logger;
-
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var requestShortPath = $"{request.Method} {request.RequestUri?.AbsolutePath}";
@@ -53,7 +48,7 @@ public class HttpRequestLogAsCommentDelegatingHandler : DelegatingHandler
     }
 
     private void LogInformation(string message, Dictionary<string, string> properties)
-        => _logger.LogInformation($"{message} {Environment.NewLine} {JsonConvert.SerializeObject(properties, Formatting.Indented)}");
+        => logger.LogInformation($"{message} {Environment.NewLine} {JsonConvert.SerializeObject(properties, Formatting.Indented)}");
 
     private async Task LogResponseAsync(string message, HttpResponseMessage response)
     {
