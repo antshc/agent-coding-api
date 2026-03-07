@@ -32,7 +32,7 @@ We use spaces.
 - Use whole words in names when possible
 
 ### Code Style
-- Use expression-bodied members for simple methods and properties (e.g., `public int MyProperty => _field;`).
+- Use expression-bodied members for simple constructor, methods and properties (e.g., `public int MyProperty => _field;`).
 
 ### Code Quality
 
