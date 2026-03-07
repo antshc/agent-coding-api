@@ -14,10 +14,9 @@
 
 ## 4. Tests
 
-- [ ] 4.1 Add integration test in `EmployeeIntegrationTests` for successful employee creation (POST returns 201 and correct body)
-- [ ] 4.2 Add integration test for blank `firstName` returns 400
-- [ ] 4.3 Add integration test for blank `lastName` returns 400
-- [ ] 4.4 Add integration test for blank `salary` returns 400
-- [ ] 4.5 Add integration test for blank `dateOfBirth` returns 400
-- [ ] 4.6 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for blank first name
-- [ ] 4.7 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for blank last name
+- [ ] 4.1 Create new integration test for `Employee`, use specs/add-new-employee for test scenarios
+- [ ] 4.2 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for blank first name
+- [ ] 4.3 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for blank last name
+- [ ] 4.4 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for negative salary
+- [ ] 4.5 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for dateOfBirth in the future
+- [ ] 4.6 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for dateOfBirth more than 120 years ago
