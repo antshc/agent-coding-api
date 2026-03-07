@@ -12,10 +12,7 @@ public class UsersController : ControllerBase
 {
     private readonly IUserQuery _userQuery;
 
-    public UsersController(IUserQuery userQuery)
-    {
-        _userQuery = userQuery;
-    }
+    public UsersController(IUserQuery userQuery) => _userQuery = userQuery;
 
     [SwaggerOperation(Summary = "Get employee by id")]
     [HttpGet("{id}")]

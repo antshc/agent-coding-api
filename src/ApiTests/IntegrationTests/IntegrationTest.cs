@@ -29,9 +29,6 @@ public class IntegrationTest : IDisposable
         }
     }
 
-    public void Dispose()
-    {
-        HttpClient.Dispose();
-    }
+    public void Dispose() => HttpClient.Dispose();
 }
 

@@ -24,9 +24,6 @@ internal static class ShouldExtensions
         Assert.Equal(JsonConvert.SerializeObject(expectedContent), JsonConvert.SerializeObject(apiResponse.Data));
     }
 
-    private static void AssertCommonResponseParts(this HttpResponseMessage response, HttpStatusCode expectedStatusCode)
-    {
-        Assert.Equal(expectedStatusCode, response.StatusCode);
-    }
+    private static void AssertCommonResponseParts(this HttpResponseMessage response, HttpStatusCode expectedStatusCode) => Assert.Equal(expectedStatusCode, response.StatusCode);
 }
 

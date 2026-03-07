@@ -18,10 +18,7 @@ public static class DependencyInjection
         return services;
     }
 
-    private static void SharedKernel(IServiceCollection services)
-    {
-        services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
-    }
+    private static void SharedKernel(IServiceCollection services) => services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
     private static void DataLayer(IServiceCollection services, IConfiguration configuration)
     {
@@ -32,10 +29,7 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
     }
 
-    private static void ApplicationLayer(IServiceCollection services)
-    {
-        services.AddScoped<IUserQuery, UserQuery>();
-    }
+    private static void ApplicationLayer(IServiceCollection services) => services.AddScoped<IUserQuery, UserQuery>();
 
     private static void DomainLayer(IServiceCollection services)
     {

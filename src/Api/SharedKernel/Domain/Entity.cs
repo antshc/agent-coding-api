@@ -7,10 +7,7 @@ public abstract class Entity
 {
     public int Id { get; private set; }
 
-    protected void CheckRule(IBusinessRule rule)
-    {
-        rule.Check();
-    }
+    protected void CheckRule(IBusinessRule rule) => rule.Check();
 
     public override bool Equals(object? obj)
     {
@@ -26,8 +23,5 @@ public abstract class Entity
         return Id == other.Id;
     }
 
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode();
-    }
+    public override int GetHashCode() => Id.GetHashCode();
 }
