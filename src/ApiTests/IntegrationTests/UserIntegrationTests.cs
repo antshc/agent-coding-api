@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Api.Application.Users.Payload;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace ApiTests.IntegrationTests;
 
-public class UserIntegrationTests : IntegrationTest
+public class UserIntegrationTests(WebApplicationFactory<Program> factory) : IntegrationTest(factory)
 {
     [Fact]
     public async Task WhenAskedForAllEmployees_ShouldReturnAllEmployees()

@@ -1,34 +1,22 @@
-using System;
 using System.Net.Http;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Xunit;
 
 namespace ApiTests.IntegrationTests;
 
-// why? The integration test strategy follows the official ASP.NET Core approach for hosting the System Under Test (SUT) within a single process.  
-// This enables realistic end-to-end testing and debugging. External dependencies such as the database are isolated using Testcontainers, ensuring a clean and reproducible environment for each test run.  
-// Scenario-based tests are written using a BDD-style framework to enhance readability. Each scenario can be linked to test case IDs in a test management tool, supporting traceability and visibility during release cycles.
-// More: STR50
-public class IntegrationTest : IDisposable
+// why? The integration test strategy follows the official ASP.NET Core approach for hosting the System Under Test (SUT) within a single process.
+// WebApplicationFactory<TEntryPoint> bootstraps the SUT in-process, providing a realistic end-to-end test environment without requiring a running server.
+// IClassFixture<WebApplicationFactory<Program>> shares a single factory instance across all tests in the class, improving performance.
+// CreateClient() returns an HttpClient that automatically follows redirects and handles cookies.
+// More: https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests
+public class IntegrationTest : IClassFixture<WebApplicationFactory<Program>>
 {
-    private HttpClient? _httpClient;
+    protected HttpClient HttpClient { get; }
 
-    protected HttpClient HttpClient
+    public IntegrationTest(WebApplicationFactory<Program> factory)
     {
-        get
-        {
-            if (_httpClient == default)
-            {
-                _httpClient = new HttpClient
-                {
-                    //task: update your port if necessary
-                    BaseAddress = new Uri("https://localhost:7124")
-                };
-                _httpClient.DefaultRequestHeaders.Add("accept", "text/plain");
-            }
-
-            return _httpClient;
-        }
+        HttpClient = factory.CreateClient();
+        HttpClient.DefaultRequestHeaders.Add("accept", "text/plain");
     }
-
-    public void Dispose() => HttpClient.Dispose();
 }
 
