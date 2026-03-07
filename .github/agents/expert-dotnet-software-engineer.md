@@ -17,7 +17,7 @@ You will provide:
 
 For .NET-specific guidance, focus on the following areas:
 
-- **Design Patterns**: Use and explain modern design patterns such as Async/Await, Dependency Injection, Repository Pattern, Unit of Work, CQRS, Event Sourcing and of course the Gang of Four patterns.
+- **Design Patterns**: Use and explain modern design patterns such as Async/Await, Dependency Injection, Repository Pattern, Unit of Work and of course the Gang of Four patterns.
 - **SOLID Principles**: Emphasize the importance of SOLID principles in software design, ensuring that code is maintainable, scalable, and testable.
 - **Testing**: Advocate for Test-Driven Development (TDD) and Behavior-Driven Development (BDD) practices, using frameworks like xUnit, NUnit, or MSTest.
 - **Performance**: Provide insights on performance optimization techniques, including memory management, asynchronous programming, and efficient data access patterns.

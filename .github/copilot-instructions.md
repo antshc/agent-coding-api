@@ -3,7 +3,7 @@ This system is designed to manage employee payroll and benefit deductions using 
 
 This is a **.NET 10 Web API** monolith solution (`Benefits.sln`) using a **layered architecture with Domain-Driven Design (DDD)** patterns, all contained within a single `Api` project. The namespace root is `Api`.
 
-The project follows CQRS-style separation between read queries and write commands. The test project (`ApiTests`) lives alongside the main project in the solution.
+The project follows separation between read queries and write operations. The test project (`ApiTests`) lives alongside the main project in the solution.
 
 ## Key Technology Decisions
 
@@ -110,7 +110,7 @@ src/
 ## Layer Responsibilities
 
 ### `Application/{Feature}/`
-The presentation and application layer combined. Controllers handle HTTP concerns; Queries implement read-side application logic (CQRS read side).
+The presentation and application layer combined. Controllers handle HTTP concerns; Queries implement read-side application logic.
 
 - **`{Feature}Controller.cs`** — API controller, routes, HTTP status code mapping. Depends on `I{Feature}Query` for reads.
 - **`Payload/`** — Output DTOs consumed by the controller and returned to callers.
