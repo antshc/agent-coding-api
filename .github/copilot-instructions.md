@@ -31,6 +31,9 @@ We use spaces.
 - **Local variables and parameters**: camelCase
 - Use whole words in names when possible
 
+### Code Style
+- Use expression-bodied members for simple methods and properties (e.g., `public int MyProperty => _field;`).
+
 ### Code Quality
 
 - Always pass `CancellationToken` through async call chains — every public async method must accept and forward it.
@@ -181,13 +184,3 @@ SharedKernel ← referenced by all layers
 - Domain entities **must not** reference any layer except `SharedKernel`.
 
 ---
-
-## Adding a New Feature — Checklist
-
-When adding a new domain feature (e.g., `Departments`):
-
-1. **Domain** — Create `Domain/Departments/Department.cs` (extends `Entity`, implements `IAggregateRoot`) and `Domain/Departments/IDepartmentRepository.cs`.
-2. **Data** — Create `Data/DepartmentRepository.cs` and `Data/Configurations/DepartmentConfiguration.cs`. Register the `DbSet<Department>` in `DataContext`.
-3. **Application** — Create `Application/Departments/DepartmentsController.cs`, `Payload/GetDepartmentDto.cs`, `Queries/IDepartmentQuery.cs`, and `Queries/DepartmentQuery.cs`.
-4. **DI** — Register the new repository and query in `DependencyInjection.cs` under the appropriate layer method.
-5. **Tests** — Add `ApiTests/IntegrationTests/DepartmentIntegrationTests.cs` and `ApiTests/UnitTests/Departments/DepartmentUnitTests.cs`.
