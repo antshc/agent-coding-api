@@ -187,3 +187,15 @@ SharedKernel ← referenced by all layers
 - Domain entities **must not** reference any layer except `SharedKernel`.
 
 ---
+
+## EF Core Migrations
+
+The following arguments are used by the `ef-core-migrations` skill for all `dotnet ef` commands.
+
+| Argument | Value |
+|---|---|
+| `{project}` | `src/Api/Api.csproj` |
+| `{startupProject}` | `src/Api/Api.csproj` |
+| `{migrationsOutput}` | `Data/Migrations` |
+
+Update these values to match your solution layout if the project or startup project paths differ.
