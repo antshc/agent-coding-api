@@ -1,5 +1,5 @@
 ---
-name: generate-integration-test
+name: generate-api-test
 description: >
   Generate LightBDD-based API integration tests for ASP.NET Core endpoints in this codebase.
   Use this skill whenever the user asks to generate, write, create, or add integration tests for an API endpoint,
