@@ -192,10 +192,18 @@ SharedKernel ← referenced by all layers
 
 The following arguments are used by the `ef-core-migrations` skill for all `dotnet ef` commands.
 
-| Argument | Value |
-|---|---|
-| `{project}` | `src/Api/Api.csproj` |
-| `{startupProject}` | `src/Api/Api.csproj` |
-| `{migrationsOutput}` | `Data/Migrations` |
+| Argument             | Value                |
+|----------------------|----------------------|
+| `{project}`          | `src/Api/Api.csproj` |
+| `{startupProject}`   | `src/Api/Api.csproj` |
+| `{migrationsOutput}` | `Data/Migrations`    |
 
 Update these values to match your solution layout if the project or startup project paths differ.
+
+## Integration Testing
+
+The following arguments are used by the `generate-api-test` skill for all `dotnet test` commands.
+
+| Argument        | Value                          |
+|-----------------|--------------------------------|
+| `{testProject}` | `src/ApiTests/ApiTests.csproj` |
