@@ -7,13 +7,8 @@ namespace Api.Data;
 // why? EF Core aligns well with DDD and Onion Architecture by supporting a code-first approach,
 // change tracking, LINQ-based querying, and automated schema migrations.
 // More: STR21, STR22, STR23
-public class DataContext : DbContext
+public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
-    public DataContext(DbContextOptions<DataContext> options)
-        : base(options)
-    {
-    }
-
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

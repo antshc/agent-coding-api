@@ -36,7 +36,7 @@ We use spaces.
 ### Code Style
 - Use expression-bodied members for simple constructor, methods and properties (e.g., `public int MyProperty => _field;`).
 - Use file scoped namespaces (`namespace Api;`) for all files.
-
+- Use Primary Constructors for all classes.
 ### Code Quality
 
 - Always pass `CancellationToken` through async call chains — every public async method must accept and forward it.

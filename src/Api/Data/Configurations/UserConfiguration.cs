@@ -8,11 +8,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        // why? Consider indexes are created for commonly queried fields
-        builder.ToTable("Employees");
+        builder.ToTable("Users");
 
         builder.HasKey(e => e.Id);
-        
+
         builder.Property(e => e.FirstName)
             .IsRequired()
             .HasMaxLength(100);

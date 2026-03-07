@@ -4,7 +4,7 @@ namespace Api.Data;
 
 public static class DatabaseInitializer
 {
-    private static List<GetUserDto> SeedData() => throw new NotImplementedException();
+    // private static List<GetUserDto> SeedData() => throw new NotImplementedException();
 
     public static void Initialize(DataContext context)
     {

@@ -8,15 +8,11 @@ namespace Api.Application.Users;
 
 [ApiController]
 [Route("[controller]")]
-public class UsersController : ControllerBase
+public class UsersController(IUserQuery userQuery) : ControllerBase
 {
-    private readonly IUserQuery _userQuery;
-
-    public UsersController(IUserQuery userQuery) => _userQuery = userQuery;
-
     [SwaggerOperation(Summary = "Create user")]
     [HttpPost]
-    public ActionResult Create(CreateUserDto userDto, CancellationToken cancellationToken) => Created();
+    public ActionResult Create(CreateUserDto userDto, CancellationToken _) => Created("", userDto);
 
     [SwaggerOperation(Summary = "Get user by id")]
     [HttpGet("{id}")]
@@ -24,7 +20,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            var emp = await _userQuery.GetById(id, cancellationToken);
+            var emp = await userQuery.GetById(id, cancellationToken);
 
             var result = new ApiResponse<GetUserDto>
             {
@@ -48,7 +44,7 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<ApiResponse<IReadOnlyCollection<GetUserDto>>>> GetAll(CancellationToken cancellationToken)
     {
         //task: use a more realistic production approach
-        IReadOnlyCollection<GetUserDto> employees = await _userQuery.GetAll(cancellationToken);
+        IReadOnlyCollection<GetUserDto> employees = await userQuery.GetAll(cancellationToken);
 
         var result = new ApiResponse<IReadOnlyCollection<GetUserDto>>
         {

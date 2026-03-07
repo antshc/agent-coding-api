@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Api.Application.Users.Queries;
 using Api.Data;
 using Api.Domain.Users;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api;
 
+[SuppressMessage("ReSharper", "UnusedParameter.Local")]
 public static class DependencyInjection
 {
     public static IServiceCollection AddDependencyRegistrations(this IServiceCollection services, IConfiguration configuration)
@@ -31,7 +33,7 @@ public static class DependencyInjection
 
     private static void ApplicationLayer(IServiceCollection services) => services.AddScoped<IUserQuery, UserQuery>();
 
-    private static void DomainLayer(IServiceCollection services)
+    private static void DomainLayer(IServiceCollection _)
     {
     }
 }
