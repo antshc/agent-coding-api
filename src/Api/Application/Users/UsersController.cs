@@ -7,14 +7,18 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Api.Application.Users;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly IUserQuery _userQuery;
 
     public UsersController(IUserQuery userQuery) => _userQuery = userQuery;
 
-    [SwaggerOperation(Summary = "Get employee by id")]
+    [SwaggerOperation(Summary = "Create user")]
+    [HttpPost]
+    public ActionResult Create(CreateUserDto userDto, CancellationToken cancellationToken) => Created();
+
+    [SwaggerOperation(Summary = "Get user by id")]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<GetUserDto>>> Get(int id, CancellationToken cancellationToken)
     {
@@ -39,7 +43,7 @@ public class UsersController : ControllerBase
         }
     }
 
-    [SwaggerOperation(Summary = "Get all employees")]
+    [SwaggerOperation(Summary = "Get all users")]
     [HttpGet("")]
     public async Task<ActionResult<ApiResponse<IReadOnlyCollection<GetUserDto>>>> GetAll(CancellationToken cancellationToken)
     {
