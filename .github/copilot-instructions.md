@@ -11,6 +11,8 @@ The project follows separation between read queries and write operations. The te
 - **EF Core 10** with SQL Server (`Microsoft.EntityFrameworkCore.SqlServer`)
 - **Swashbuckle 10** for OpenAPI / Swagger documentation
 - **xUnit** for unit and integration tests
+- **Microsoft.AspNetCore.Mvc.Testing** for in-memory test server and `HttpClient` integration tests
+- **Testcontainers.MsSql** for integration testing with a real SQL Server instance in Docker
 - `InternalsVisibleTo("ApiTests")` allows `internal` query implementations to be tested directly
 ---
 
