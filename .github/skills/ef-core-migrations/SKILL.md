@@ -7,7 +7,7 @@ description: "Applies when a domain entity class is updated — properties are a
 
 ## Arguments
 
-All `dotnet ef` commands use the following arguments. Read their values from the `ef-core-migrations` section in [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md):
+All `dotnet ef` commands use the following arguments. Read their values from the `ef-core-migrations` section in `.github/copilot-instructions.md`:
 
 | Placeholder | Description |
 |---|---|
