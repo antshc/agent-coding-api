@@ -50,6 +50,7 @@ We use spaces.
 - Register every new repository, query, or service in `DependencyInjection.cs` under the correct layer method (`ApplicationLayer`, `DomainLayer`, `DataLayer`, `SharedKernel`).
 - Do not add tests to the wrong class. Unit tests go in `UnitTests/{Feature}/`, integration tests go in `IntegrationTests/`. Look for existing test classes before creating new ones.
 - If you create any temporary files, scripts, or helpers during iteration, remove them before finishing the task.
+- Do not make model properties nullable if they are required. Instead, keep them non-nullable and rely on the implicit required validation behavior.
 
 ---
 
