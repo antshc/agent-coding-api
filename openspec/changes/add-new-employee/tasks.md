@@ -14,7 +14,7 @@
 
 ## 4. Tests
 
-- [ ] 4.1 Create new integration test for `Employee`, use specs/add-new-employee for test scenarios
+- [ ] 4.1 Create integration test for `Employee`, use specs/create-employee for test scenarios. verify all scenrios implemented and pass.
 - [ ] 4.2 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for blank first name
 - [ ] 4.3 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for blank last name
 - [ ] 4.4 Add unit test in `EmployeeUnitTests` verifying `Employee` constructor throws for negative salary
