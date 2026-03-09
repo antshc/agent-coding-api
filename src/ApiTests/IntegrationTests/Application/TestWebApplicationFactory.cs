@@ -32,7 +32,8 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
     )
     {
         _testAppConfigurationsProvider = testAppConfigurationsProvider;
-        UsersClient = RestClient.For<IUsersClient>(CreateClientWithLogger());
+        HttpClient httpClient = CreateClientWithLogger();
+        UsersClient = RestClient.For<IUsersClient>(httpClient);
     }
 
     public IUsersClient UsersClient { get; }
