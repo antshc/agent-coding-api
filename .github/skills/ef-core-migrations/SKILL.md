@@ -8,25 +8,16 @@ description: >
   - A DbContext model configuration is changed
   - IEntityTypeConfiguration or Fluent API mapping is updated
   - Repository changes require a schema update
+
+  Do NOT use this skill when:
+  - Only LINQ queries changed
+  - DTOs changed
+  - Service logic changed
+  - API controllers changed
+  - Tests were updated
 ---
 
 # EF Core Migrations
-## Triggers
-
-Run this skill when:
-
-- Entity classes change
-- DbContext model changes
-- Navigation properties change
-- Repository schema changes
-
-Do NOT use this skill when:
-- Only LINQ queries changed
-- DTOs changed
-- Service logic changed
-- API controllers changed
-- Tests were updated
----
 
 ## Arguments
 
