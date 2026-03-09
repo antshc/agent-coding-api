@@ -93,7 +93,7 @@ the agent must confirm the operation is intended.
 ### Build the project
 
 ```bash
-dotnet build {project}
+dotnet build {project} --configuration Debug -v q 2>&1 | Select-Object -Last <the number of lines in the build output that contain warnings or errors>
 ```
 
 ### Add a migration
