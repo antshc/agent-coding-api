@@ -1,0 +1,12 @@
+{
+  "eval_id": 1,
+  "eval_name": "add-employee-dob",
+  "prompt": "I just added a DateOfBirth property to the Employee entity. Can you create and apply the EF Core migration for this change?",
+  "assertions": [
+    "A `dotnet build` command is run or recommended before adding the migration",
+    "A `dotnet ef migrations add` command is recommended with a descriptive name containing 'AddEmployee' and 'DateOfBirth' (or similar)",
+    "The migration name follows the AddEntityProperty convention (e.g., AddEmployeeDateOfBirth)",
+    "A `dotnet ef database update` command is recommended to apply the migration",
+    "The response mentions reviewing or checking the generated migration file"
+  ]
+}

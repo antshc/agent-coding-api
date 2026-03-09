@@ -1,0 +1,53 @@
+{
+  "expectations": [
+    {
+      "text": "A warning about potential data loss (DropColumn/RenameColumn risk) is included",
+      "passed": true,
+      "evidence": "Section 4 titled 'Review the Generated Migration - WARNING: Data Loss Risk' explicitly warns: 'EF Core may generate a `DropColumn` + `AddColumn` pair if it cannot detect the rename was intentional. This destroys all existing column data.' Safe vs. dangerous migration outputs are shown side-by-side."
+    },
+    {
+      "text": "The agent verifies intent or asks for confirmation before proceeding with a rename",
+      "passed": true,
+      "evidence": "Section 4 requires user review: 'Open the generated `*_RenameEmployeeFullNameToDisplayName.cs` file and inspect the `Up()` method.' Section 5 states: 'Once the migration content is verified to use `RenameColumn`' before proceeding. Pre-apply checklist reinforces verification."
+    },
+    {
+      "text": "A `dotnet ef migrations add` command with 'Rename' in the migration name is recommended (e.g., RenameEmployeeFullNameToDisplayName)",
+      "passed": true,
+      "evidence": "Section 3 'Add the Migration' states: 'Using the naming convention `Rename<EntityName><OldName>To<NewName>`, the migration name is `RenameEmployeeFullNameToDisplayName`.' Full command provided with all required arguments."
+    },
+    {
+      "text": "The response mentions reviewing whether the migration uses RenameColumn vs DropColumn+AddColumn",
+      "passed": true,
+      "evidence": "Section 4 provides detailed comparison with labeled examples: 'Safe output (what you want to see)' shows `migrationBuilder.RenameColumn(...)' and 'Dangerous output - do NOT apply this' shows `DropColumn` + `AddColumn`. Two remediation paths documented."
+    },
+    {
+      "text": "A `dotnet ef database update` command is recommended to apply the migration",
+      "passed": true,
+      "evidence": "Section 5 'Apply the Migration' recommends: 'dotnet ef database update --project src/Api/Api.csproj'. Also listed in 'All Commands at a Glance' section."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "claims": [
+    {
+      "claim": "Response includes two remediation paths when DropColumn+AddColumn is generated",
+      "type": "process",
+      "verified": true,
+      "evidence": "Section 4 provides 'Option A - Edit the migration manually' and 'Option B - Remove and re-check'"
+    },
+    {
+      "claim": "Migration naming convention follows project standards (Rename<EntityName><OldName>To<NewName>)",
+      "type": "process",
+      "verified": true,
+      "evidence": "Section 3 explicitly documents the Rename naming convention and uses RenameEmployeeFullNameToDisplayName"
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "EXCELLENT: All 5 expectations passed. Response demonstrates mastery of EF Core migration rename risks with clear warnings, verification requirements, proper command syntax, and remediation guidance."
+  }
+}

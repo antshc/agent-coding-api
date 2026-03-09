@@ -1,0 +1,323 @@
+{
+  "metadata": {
+    "skill_name": "ef-core-migrations",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-03-09T10:13:29Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A `dotnet build` command is run or recommended before adding the migration",
+          "passed": true,
+          "evidence": "Step 2 explicitly shows: 'Command: dotnet build src/Api/Api.csproj /p:TreatWarningsAsErrors=false /p:EnforceCodeStyleInBuild=false' with 'Result: Build succeeded. 0 Warning(s) 0 Error(s)'"
+        },
+        {
+          "text": "A `dotnet ef migrations add` command with a descriptive name is recommended (e.g., 'AddDependent' or 'AddDependentEmployeeRelation')",
+          "passed": true,
+          "evidence": "Step 3 shows: 'dotnet ef migrations add AddDependentEmployeeRelation --project src/Api/Api.csproj --startup-project src/Api/Api.csproj --output-dir Data/Migrations'"
+        },
+        {
+          "text": "The response mentions reviewing the foreign key or relationship in the migration",
+          "passed": true,
+          "evidence": "Step 4 contains detailed FK review: 'ForeignKey FK_Dependents_Employees_EmployeeId -> Employees.Id (Cascade)' and review checklist confirming 'Foreign key to Employees table: PASS'"
+        },
+        {
+          "text": "A `dotnet ef database update` command is recommended to apply the migration",
+          "passed": true,
+          "evidence": "Step 5 recommends: 'dotnet ef database update --project src/Api/Api.csproj --startup-project src/Api/Api.csproj'"
+        },
+        {
+          "text": "The migration name follows one of the naming conventions: AddEntityName or AddEntityNameRelatedEntityRelation",
+          "passed": true,
+          "evidence": "Migration command uses 'AddDependentEmployeeRelation' which follows the 'AddEntityNameRelatedEntityRelation' convention"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A `dotnet build` command is run or recommended before adding the migration",
+          "passed": true,
+          "evidence": "Step 2 executes: 'dotnet build src/Api/Api.csproj' with result 'Build succeeded after fixing a formatting issue'"
+        },
+        {
+          "text": "A `dotnet ef migrations add` command is recommended with a descriptive name containing 'AddEmployee' and 'DateOfBirth' (or similar)",
+          "passed": true,
+          "evidence": "Step 3 generates and documents the migration command: 'dotnet ef migrations add AddEmployeeDateOfBirth --project src/Api/Api.csproj --startup-project src/Api/Api.csproj -o Data/Migrations'"
+        },
+        {
+          "text": "The migration name follows the AddEntityProperty convention (e.g., AddEmployeeDateOfBirth)",
+          "passed": true,
+          "evidence": "Migration file name is '20260309095939_AddEmployeeDateOfBirth.cs' which follows AddEntityProperty convention exactly"
+        },
+        {
+          "text": "A `dotnet ef database update` command is recommended to apply the migration",
+          "passed": true,
+          "evidence": "Step 5 explicitly recommends: 'dotnet ef database update --project src/Api/Api.csproj --startup-project src/Api/Api.csproj' with explanation 'This applies all pending migrations to the database'"
+        },
+        {
+          "text": "The response mentions reviewing or checking the generated migration file",
+          "passed": true,
+          "evidence": "Step 4 contains comprehensive 'Review Migration' section with detailed checklist covering column name, type, nullability, indexes, FK, and data loss operations"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A warning about potential data loss (DropColumn/RenameColumn risk) is included",
+          "passed": true,
+          "evidence": "Section 4 titled 'Review the Generated Migration - WARNING: Data Loss Risk' explicitly warns: 'EF Core may generate a `DropColumn` + `AddColumn` pair if it cannot detect the rename was intentional. This destroys all existing column data.' Safe vs. dangerous migration outputs are shown side-by-side."
+        },
+        {
+          "text": "The agent verifies intent or asks for confirmation before proceeding with a rename",
+          "passed": true,
+          "evidence": "Section 4 requires user review: 'Open the generated `*_RenameEmployeeFullNameToDisplayName.cs` file and inspect the `Up()` method.' Section 5 states: 'Once the migration content is verified to use `RenameColumn`' before proceeding. Pre-apply checklist reinforces verification."
+        },
+        {
+          "text": "A `dotnet ef migrations add` command with 'Rename' in the migration name is recommended (e.g., RenameEmployeeFullNameToDisplayName)",
+          "passed": true,
+          "evidence": "Section 3 'Add the Migration' states: 'Using the naming convention `Rename<EntityName><OldName>To<NewName>`, the migration name is `RenameEmployeeFullNameToDisplayName`.' Full command provided with all required arguments."
+        },
+        {
+          "text": "The response mentions reviewing whether the migration uses RenameColumn vs DropColumn+AddColumn",
+          "passed": true,
+          "evidence": "Section 4 provides detailed comparison with labeled examples: 'Safe output (what you want to see)' shows `migrationBuilder.RenameColumn(...)' and 'Dangerous output - do NOT apply this' shows `DropColumn` + `AddColumn`. Two remediation paths documented."
+        },
+        {
+          "text": "A `dotnet ef database update` command is recommended to apply the migration",
+          "passed": true,
+          "evidence": "Section 5 'Apply the Migration' recommends: 'dotnet ef database update --project src/Api/Api.csproj'. Also listed in 'All Commands at a Glance' section."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A `dotnet build` command is run or recommended before adding the migration",
+          "passed": false,
+          "evidence": "The response begins with Prerequisites (tool installation via 'dotnet tool restore') and proceeds directly to Step 1 migration generation. No `dotnet build` command is mentioned before running migrations."
+        },
+        {
+          "text": "A `dotnet ef migrations add` command with a descriptive name is recommended (e.g., 'AddDependent' or 'AddDependentEmployeeRelation')",
+          "passed": true,
+          "evidence": "Step 2 recommends: 'dotnet ef migrations add AddDependentEntity' with proper flags (--project, --startup-project, --output-dir). The name 'AddDependentEntity' is descriptive and follows naming convention."
+        },
+        {
+          "text": "The response mentions reviewing the foreign key or relationship in the migration",
+          "passed": true,
+          "evidence": "Step 3 'Review the Generated Migration' explicitly instructs to verify 'A foreign key constraint referencing the `Employees` table on `EmployeeId`' with a complete code example."
+        },
+        {
+          "text": "A `dotnet ef database update` command is recommended to apply the migration",
+          "passed": true,
+          "evidence": "Step 4 'Apply the Migration' shows: 'dotnet ef database update --project src/Api/Api.csproj --startup-project src/Api/Api.csproj'"
+        },
+        {
+          "text": "The migration name follows one of the naming conventions: AddEntityName or AddEntityNameRelatedEntityRelation",
+          "passed": true,
+          "evidence": "Migration name 'AddDependentEntity' follows the 'AddEntityName' convention pattern."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A `dotnet build` command is run or recommended before adding the migration",
+          "passed": false,
+          "evidence": "Prerequisites section recommends 'dotnet tool restore' but does NOT mention building the project before migrations. No `dotnet build` command appears anywhere in the response."
+        },
+        {
+          "text": "A `dotnet ef migrations add` command is recommended with a descriptive name containing 'AddEmployee' and 'DateOfBirth' (or similar)",
+          "passed": true,
+          "evidence": "Step 1 shows: 'dotnet ef migrations add AddEmployeeDateOfBirth' with proper flags"
+        },
+        {
+          "text": "The migration name follows the AddEntityProperty convention (e.g., AddEmployeeDateOfBirth)",
+          "passed": true,
+          "evidence": "Name is 'AddEmployeeDateOfBirth' which follows Add{Employee}{DateOfBirth} convention"
+        },
+        {
+          "text": "A `dotnet ef database update` command is recommended to apply the migration",
+          "passed": true,
+          "evidence": "Step 3 clearly recommends: 'dotnet ef database update'"
+        },
+        {
+          "text": "The response mentions reviewing or checking the generated migration file",
+          "passed": true,
+          "evidence": "Step 2 titled 'Review the Migration' with detailed guidance on Up/Down methods"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A warning about potential data loss (DropColumn/RenameColumn risk) is included",
+          "passed": true,
+          "evidence": "Background section states 'This would cause **data loss** in production.' Step 2 shows incorrect DropColumn/AddColumn vs correct RenameColumn approach. Key Principle warns 'destructive drop-and-add that deletes all existing column data.'"
+        },
+        {
+          "text": "The agent verifies intent or asks for confirmation before proceeding with a rename",
+          "passed": false,
+          "evidence": "No confirmation gate exists. Response assumes proceeding without asking for user acknowledgment before recommending the rename. Steps proceed directly to implementation."
+        },
+        {
+          "text": "A `dotnet ef migrations add` command with 'Rename' in the migration name is recommended (e.g., RenameEmployeeFullNameToDisplayName)",
+          "passed": true,
+          "evidence": "Step 1 provides command: 'dotnet ef migrations add RenameFullNameToDisplayName' which includes 'Rename' in the migration name."
+        },
+        {
+          "text": "The response mentions reviewing whether the migration uses RenameColumn vs DropColumn+AddColumn",
+          "passed": true,
+          "evidence": "Step 2 'Edit the Generated Migration File' explicitly shows both incorrect generated code (DropColumn/AddColumn) and correct replacement (RenameColumn). States: 'Replace both methods with the following, which uses `RenameColumn` to preserve existing data.'"
+        },
+        {
+          "text": "A `dotnet ef database update` command is recommended to apply the migration",
+          "passed": true,
+          "evidence": "Step 3 'Apply the Migration' provides: 'dotnet ef database update --project src/Api/Api.csproj --startup-project src/Api/Api.csproj'"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.8,
+        "stddev": 0.0,
+        "min": 0.8,
+        "max": 0.8
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.20",
+      "time_seconds": "+0.0",
+      "tokens": "+0"
+    }
+  },
+  "notes": []
+}

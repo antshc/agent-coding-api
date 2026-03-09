@@ -1,0 +1,12 @@
+{
+  "eval_id": 3,
+  "eval_name": "eval-rename-property",
+  "prompt": "I renamed the FullName property on Employee to DisplayName in the entity and its EF Core configuration. What migration steps do I need to run?",
+  "assertions": [
+    "A warning about potential data loss (DropColumn/RenameColumn risk) is included",
+    "The agent verifies intent or asks for confirmation before proceeding with a rename",
+    "A `dotnet ef migrations add` command with 'Rename' in the migration name is recommended (e.g., RenameEmployeeFullNameToDisplayName)",
+    "The response mentions reviewing whether the migration uses RenameColumn vs DropColumn+AddColumn",
+    "A `dotnet ef database update` command is recommended to apply the migration"
+  ]
+}

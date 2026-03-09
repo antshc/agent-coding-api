@@ -1,0 +1,13 @@
+{
+  "tool_calls": {"Read": 7, "Write": 3, "Terminal": 6},
+  "total_tool_calls": 16,
+  "total_steps": 5,
+  "files_created": ["response.md", "transcript.md", "metrics.json"],
+  "errors_encountered": 1,
+  "errors_detail": ["Empty migration generated (Dependent already in prior migration) - removed empty files"],
+  "output_chars": 3198,
+  "transcript_chars": 1549,
+  "migration_result": "no_new_migration_needed",
+  "existing_migration": "20260309095939_AddEmployeeDateOfBirth",
+  "notes": "Dependent entity with FK to Employee was already fully captured in the prior migration. Model snapshot confirmed alignment."
+}

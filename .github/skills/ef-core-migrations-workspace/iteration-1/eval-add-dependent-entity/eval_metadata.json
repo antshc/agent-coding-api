@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "add-dependent-entity",
+  "prompt": "I've added a new Dependent entity with a foreign key back to Employee. Please generate the migration.",
+  "assertions": [
+    "A `dotnet build` command is run or recommended before adding the migration",
+    "A `dotnet ef migrations add` command with a descriptive name is recommended (e.g., 'AddDependent' or 'AddDependentEmployeeRelation')",
+    "The response mentions reviewing the foreign key or relationship in the migration",
+    "A `dotnet ef database update` command is recommended to apply the migration",
+    "The migration name follows one of the naming conventions: AddEntityName or AddEntityNameRelatedEntityRelation"
+  ]
+}

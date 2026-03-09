@@ -1,0 +1,23 @@
+{
+  "skill_name": "ef-core-migrations",
+  "prompts": [
+    {
+      "id": 1,
+      "prompt": "I just added a DateOfBirth property to the Employee entity. Can you create and apply the EF Core migration for this change?",
+      "expected_output": "Builds the project, runs `dotnet ef migrations add AddEmployeeDateOfBirth`, reviews the generated migration for correct column name and nullability, then applies it with `dotnet ef database update`.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I've added a new Dependent entity with a foreign key back to Employee. Please generate the migration.",
+      "expected_output": "Builds the project, runs `dotnet ef migrations add AddDependent` (or `AddDependentEmployeeRelation`), reviews the migration for the correct table, foreign key column, and index, then applies it.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I renamed the FullName property on Employee to DisplayName in the entity and its EF Core configuration. What migration steps do I need to run?",
+      "expected_output": "Warns about potential data loss from a column rename, verifies intent, runs `dotnet ef migrations add RenameEmployeeFullNameToDisplayName`, reviews for RenameColumn (not DropColumn + AddColumn), and applies with `dotnet ef database update`.",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+﻿{
+    "output_chars":  4202,
+    "transcript_chars":  888,
+    "errors_encountered":  0,
+    "files_created":  [
+                          "response.md",
+                          "transcript.md",
+                          "metrics.json"
+                      ],
+    "tool_calls":  {
+                       "Write":  3,
+                       "Read":  0
+                   },
+    "total_tool_calls":  3,
+    "total_steps":  3
+}

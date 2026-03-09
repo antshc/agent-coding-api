@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "A `dotnet build` command is run or recommended before adding the migration",
+      "passed": false,
+      "evidence": "The response begins with Prerequisites (tool installation via 'dotnet tool restore') and proceeds directly to Step 1 migration generation. No `dotnet build` command is mentioned before running migrations."
+    },
+    {
+      "text": "A `dotnet ef migrations add` command with a descriptive name is recommended (e.g., 'AddDependent' or 'AddDependentEmployeeRelation')",
+      "passed": true,
+      "evidence": "Step 2 recommends: 'dotnet ef migrations add AddDependentEntity' with proper flags (--project, --startup-project, --output-dir). The name 'AddDependentEntity' is descriptive and follows naming convention."
+    },
+    {
+      "text": "The response mentions reviewing the foreign key or relationship in the migration",
+      "passed": true,
+      "evidence": "Step 3 'Review the Generated Migration' explicitly instructs to verify 'A foreign key constraint referencing the `Employees` table on `EmployeeId`' with a complete code example."
+    },
+    {
+      "text": "A `dotnet ef database update` command is recommended to apply the migration",
+      "passed": true,
+      "evidence": "Step 4 'Apply the Migration' shows: 'dotnet ef database update --project src/Api/Api.csproj --startup-project src/Api/Api.csproj'"
+    },
+    {
+      "text": "The migration name follows one of the naming conventions: AddEntityName or AddEntityNameRelatedEntityRelation",
+      "passed": true,
+      "evidence": "Migration name 'AddDependentEntity' follows the 'AddEntityName' convention pattern."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 1,
+    "total": 5,
+    "pass_rate": 0.8
+  },
+  "claims": [
+    {
+      "claim": "Response provides Windows PowerShell syntax alongside bash syntax",
+      "type": "process",
+      "verified": true,
+      "evidence": "Step 2 shows both bash (line continuation) and Windows PowerShell (single line) command variants."
+    },
+    {
+      "claim": "Response includes troubleshooting section",
+      "type": "process",
+      "verified": true,
+      "evidence": "Troubleshooting section lists four common issues with fixes (No DbContext found, Unable to create object, Migration is empty, FK not detected)."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      "The missing `dotnet build` step is a clear differentiator between skill-guided and baseline responses"
+    ],
+    "overall": "Well-structured response covering most best practices. Primary gap is missing `dotnet build` before migration generation. 4/5 pass rate."
+  }
+}

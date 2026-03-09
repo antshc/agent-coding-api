@@ -1,4 +1,5 @@
 using Api.Data.Configurations;
+using Api.Domain.Employees;
 using Api.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,14 @@ namespace Api.Data;
 public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Dependent> Dependents { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+        modelBuilder.ApplyConfiguration(new DependentConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 }

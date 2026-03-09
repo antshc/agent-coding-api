@@ -1,0 +1,53 @@
+{
+  "expectations": [
+    {
+      "text": "A `dotnet build` command is run or recommended before adding the migration",
+      "passed": true,
+      "evidence": "Step 2 explicitly shows: 'Command: dotnet build src/Api/Api.csproj /p:TreatWarningsAsErrors=false /p:EnforceCodeStyleInBuild=false' with 'Result: Build succeeded. 0 Warning(s) 0 Error(s)'"
+    },
+    {
+      "text": "A `dotnet ef migrations add` command with a descriptive name is recommended (e.g., 'AddDependent' or 'AddDependentEmployeeRelation')",
+      "passed": true,
+      "evidence": "Step 3 shows: 'dotnet ef migrations add AddDependentEmployeeRelation --project src/Api/Api.csproj --startup-project src/Api/Api.csproj --output-dir Data/Migrations'"
+    },
+    {
+      "text": "The response mentions reviewing the foreign key or relationship in the migration",
+      "passed": true,
+      "evidence": "Step 4 contains detailed FK review: 'ForeignKey FK_Dependents_Employees_EmployeeId -> Employees.Id (Cascade)' and review checklist confirming 'Foreign key to Employees table: PASS'"
+    },
+    {
+      "text": "A `dotnet ef database update` command is recommended to apply the migration",
+      "passed": true,
+      "evidence": "Step 5 recommends: 'dotnet ef database update --project src/Api/Api.csproj --startup-project src/Api/Api.csproj'"
+    },
+    {
+      "text": "The migration name follows one of the naming conventions: AddEntityName or AddEntityNameRelatedEntityRelation",
+      "passed": true,
+      "evidence": "Migration command uses 'AddDependentEmployeeRelation' which follows the 'AddEntityNameRelatedEntityRelation' convention"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "claims": [
+    {
+      "claim": "Build command executed successfully before EF migrations tooling",
+      "type": "process",
+      "verified": true,
+      "evidence": "Build output shows '0 Warning(s) 0 Error(s)' confirming successful compilation"
+    },
+    {
+      "claim": "FK and cascade delete configuration was thoroughly reviewed",
+      "type": "process",
+      "verified": true,
+      "evidence": "Response includes explicit checklist validation of FK column, foreign key, cascade delete, nullability, and index"
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "EXCELLENT - All 5 expectations met. The skill produces a methodical workflow covering build, naming, FK review, and apply."
+  }
+}

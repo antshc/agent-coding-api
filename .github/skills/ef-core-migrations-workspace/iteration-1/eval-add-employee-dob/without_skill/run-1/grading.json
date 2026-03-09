@@ -1,0 +1,49 @@
+{
+  "expectations": [
+    {
+      "text": "A `dotnet build` command is run or recommended before adding the migration",
+      "passed": false,
+      "evidence": "Prerequisites section recommends 'dotnet tool restore' but does NOT mention building the project before migrations. No `dotnet build` command appears anywhere in the response."
+    },
+    {
+      "text": "A `dotnet ef migrations add` command is recommended with a descriptive name containing 'AddEmployee' and 'DateOfBirth' (or similar)",
+      "passed": true,
+      "evidence": "Step 1 shows: 'dotnet ef migrations add AddEmployeeDateOfBirth' with proper flags"
+    },
+    {
+      "text": "The migration name follows the AddEntityProperty convention (e.g., AddEmployeeDateOfBirth)",
+      "passed": true,
+      "evidence": "Name is 'AddEmployeeDateOfBirth' which follows Add{Employee}{DateOfBirth} convention"
+    },
+    {
+      "text": "A `dotnet ef database update` command is recommended to apply the migration",
+      "passed": true,
+      "evidence": "Step 3 clearly recommends: 'dotnet ef database update'"
+    },
+    {
+      "text": "The response mentions reviewing or checking the generated migration file",
+      "passed": true,
+      "evidence": "Step 2 titled 'Review the Migration' with detailed guidance on Up/Down methods"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 1,
+    "total": 5,
+    "pass_rate": 0.8
+  },
+  "claims": [
+    {
+      "claim": "Response documents rollback steps and verification via __EFMigrationsHistory",
+      "type": "process",
+      "verified": true,
+      "evidence": "Response includes dotnet ef database update rollback steps and migration history verification"
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      "The `dotnet build` assertion clearly differentiates skill vs. no-skill behavior — without the skill, agents skip the build step"
+    ],
+    "overall": "Good response overall, but missing the preliminary build step that the skill prescribes. 4/5 expectations met."
+  }
+}
