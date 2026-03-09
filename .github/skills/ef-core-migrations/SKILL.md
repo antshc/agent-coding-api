@@ -54,7 +54,7 @@ Whenever a domain entity is modified (property added, removed, or renamed), foll
 
 ## Verify entity configuration
 
-- Decimal Precision Rule: When creating or updating Entity Framework Core entity configurations, all decimal properties must explicitly define precision using .HasPrecision(18, 2) in the Fluent API. Do not use .HasColumnType("decimal(18,2)")
+- Use .HasPrecision(18, 2) for every decimal/decimal? property in EF Core Fluent API. Never use .HasColumnType("decimal(18,2)").
 
 --- 
 
