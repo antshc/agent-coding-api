@@ -20,3 +20,29 @@ The system SHALL return HTTP 400 Bad Request when the provided `lastName` is nul
 #### Scenario: Blank last name rejected
 - **WHEN** a caller sends `POST /api/v1/employees` with a blank or missing `lastName`
 - **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
+
+### Requirement: Reject invalid salary
+The system SHALL return HTTP 400 Bad Request when the provided `salary` is null/missing or less than zero.
+
+#### Scenario: Missing salary rejected
+- **WHEN** a caller sends `POST /api/v1/employees` without a `salary`
+- **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
+
+#### Scenario: Negative salary rejected
+- **WHEN** a caller sends `POST /api/v1/employees` with a `salary` less than `0`
+- **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
+
+### Requirement: Reject invalid date of birth
+The system SHALL return HTTP 400 Bad Request when the provided `dateOfBirth` is null/missing, is a future date, or represents an age greater than 120 years.
+
+#### Scenario: Missing date of birth rejected
+- **WHEN** a caller sends `POST /api/v1/employees` without a `dateOfBirth`
+- **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
+
+#### Scenario: Future date of birth rejected
+- **WHEN** a caller sends `POST /api/v1/employees` with a `dateOfBirth` that is in the future
+- **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
+
+#### Scenario: Date of birth older than 120 years rejected
+- **WHEN** a caller sends `POST /api/v1/employees` with a `dateOfBirth` more than 120 years in the past
+- **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
