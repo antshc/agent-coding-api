@@ -22,7 +22,7 @@ The system SHALL return HTTP 400 Bad Request when the provided `lastName` is nul
 - **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
 
 ### Requirement: Reject invalid salary
-The system SHALL return HTTP 400 Bad Request when the provided `salary` is null/missing or less than zero.
+The system SHALL return HTTP 400 Bad Request when the provided `salary` is not set in the request or less than zero.
 
 #### Scenario: Missing salary rejected
 - **WHEN** a caller sends `POST /api/v1/employees` without a `salary`
@@ -33,7 +33,7 @@ The system SHALL return HTTP 400 Bad Request when the provided `salary` is null/
 - **THEN** the system returns HTTP 400 Bad Request with `success: false` and an error message describing the validation failure
 
 ### Requirement: Reject invalid date of birth
-The system SHALL return HTTP 400 Bad Request when the provided `dateOfBirth` is null/missing, is a future date, or represents an age greater than 120 years.
+The system SHALL return HTTP 400 Bad Request when the provided `dateOfBirth` is not set in the request, is a future date, or represents an age greater than 120 years.
 
 #### Scenario: Missing date of birth rejected
 - **WHEN** a caller sends `POST /api/v1/employees` without a `dateOfBirth`
