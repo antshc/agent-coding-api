@@ -1,9 +1,32 @@
 ---
 name: ef-core-migrations
-description: "Applies when a domain entity class is updated — properties are added, removed, or renamed — or when repository changes require a database schema update. Triggers include: adding columns to an entity, removing properties from a domain model, renaming entity properties, changing property types, or updating relationships (navigation properties, foreign keys). Also applies after modifying DbContext configurations, entity configurations, or IRepository implementations that affect the schema. Not applicable for data seeding, query optimization, or changes that don't affect the database schema."
+description: >
+  Triggers when database schema changes are required in an ASP.NET Core project using Entity Framework Core.
+  Use this skill when:
+  - A property is added, removed, or renamed in an entity class
+  - A navigation property or foreign key is modified
+  - A DbContext model configuration is changed
+  - IEntityTypeConfiguration or Fluent API mapping is updated
+  - Repository changes require a schema update
 ---
 
 # EF Core Migrations
+## Triggers
+
+Run this skill when:
+
+- Entity classes change
+- DbContext model changes
+- Navigation properties change
+- Repository schema changes
+
+Do NOT use this skill when:
+- Only LINQ queries changed
+- DTOs changed
+- Service logic changed
+- API controllers changed
+- Tests were updated
+---
 
 ## Arguments
 
@@ -16,18 +39,71 @@ All `dotnet ef` commands use the following arguments. Read their values from the
 | `{migrationsOutput}` | Output folder for migration files |
 
 ---
+## Preconditions
+
+Before running migrations verify:
+
+- The project uses Entity Framework Core
+- A DbContext class exists
+- The project builds successfully
+- The EF CLI tool is installed
+
 
 ## Workflow
 
 Whenever a domain entity is modified (property added, removed, or renamed), follow this sequence:
 
-1. Verify the code change to the entity and repository.
-2. Add a new migration to capture the schema change.
-3. Apply the migration to the database.
+1. Verify entity change
+2. Build project
+3. Add migration
+4. Review migration
+5. Apply migration
+
+---
+
+## Review generated migration
+
+After generating a migration, review:
+
+- Column names
+- Nullability
+- Indexes
+- Foreign keys
+- Data loss operations
+
+---
+
+### Data Loss Protection
+
+If a migration contains operations like:
+
+- DropColumn
+- DropTable
+- RenameColumn
+
+the agent must confirm the operation is intended.
+
+---
+
+## Migration naming conventions
+
+| Change type | Example migration name |
+|---|---|
+| Add property | `Add<EntityName><PropertyName>` |
+| Remove property | `Remove<EntityName><PropertyName>` |
+| Rename property | `Rename<EntityName><OldName>To<NewName>` |
+| Add entity/table | `Add<EntityName>` |
+| Add relationship | `Add<EntityName><RelatedEntity>Relation` |
+| Initial schema | `InitialMigration` |
 
 ---
 
 ## Commands
+### Build the project
+
+```bash
+dotnet build {project}
+```
 
 ### Add a migration
 
@@ -102,14 +178,3 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -e "M
 Update the connection string in your app configuration to use `localhost,14330`.
 
 ---
-
-## Migration naming conventions
-
-| Change type | Example migration name |
-|---|---|
-| Add property | `Add<EntityName><PropertyName>` |
-| Remove property | `Remove<EntityName><PropertyName>` |
-| Rename property | `Rename<EntityName><OldName>To<NewName>` |
-| Add entity/table | `Add<EntityName>` |
-| Add relationship | `Add<EntityName><RelatedEntity>Relation` |
-| Initial schema | `InitialMigration` |
