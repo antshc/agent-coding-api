@@ -1,0 +1,156 @@
+openapi: 3.0.4
+info:
+  description: Api to support employee benefit cost calculations
+  title: User Benefit Cost Calculation Api
+  version: v1
+servers:
+- url: /
+tags:
+- name: Users
+paths:
+  /Users:
+    get:
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GetUserDtoIReadOnlyCollectionApiResponse"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserDtoIReadOnlyCollectionApiResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GetUserDtoIReadOnlyCollectionApiResponse"
+          description: OK
+      summary: Get all users
+      tags:
+      - Users
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+      responses:
+        "200":
+          description: OK
+      summary: Create user
+      tags:
+      - Users
+  /Users/{id}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GetUserDtoApiResponse"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserDtoApiResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GetUserDtoApiResponse"
+          description: OK
+      summary: Get user by id
+      tags:
+      - Users
+components:
+  schemas:
+    CreateUserDto:
+      additionalProperties: false
+      example:
+        firstName: firstName
+        lastName: lastName
+      properties:
+        firstName:
+          nullable: true
+          type: string
+        lastName:
+          nullable: true
+          type: string
+      type: object
+    GetUserDto:
+      additionalProperties: false
+      example:
+        firstName: firstName
+        lastName: lastName
+        id: 0
+      properties:
+        id:
+          format: int32
+          type: integer
+        firstName:
+          nullable: true
+          type: string
+        lastName:
+          nullable: true
+          type: string
+      type: object
+    GetUserDtoApiResponse:
+      additionalProperties: false
+      example:
+        data:
+          firstName: firstName
+          lastName: lastName
+          id: 0
+        success: true
+        message: message
+        error: error
+      properties:
+        data:
+          $ref: "#/components/schemas/GetUserDto"
+        success:
+          type: boolean
+        message:
+          nullable: true
+          type: string
+        error:
+          nullable: true
+          type: string
+      type: object
+    GetUserDtoIReadOnlyCollectionApiResponse:
+      additionalProperties: false
+      example:
+        data:
+        - firstName: firstName
+          lastName: lastName
+          id: 0
+        - firstName: firstName
+          lastName: lastName
+          id: 0
+        success: true
+        message: message
+        error: error
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/GetUserDto"
+          nullable: true
+          type: array
+        success:
+          type: boolean
+        message:
+          nullable: true
+          type: string
+        error:
+          nullable: true
+          type: string
+      type: object
+

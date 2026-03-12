@@ -31,7 +31,10 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+app.UseDefaultFiles();
+app.MapStaticAssets();
 
+app.UseHttpsRedirection();
 // why? Add Global exception handling. It ensures that unhandled errors are caught and translated into consistent HTTP responses.
 // It improves API reliability, simplifies debugging, and prevents sensitive details from leaking to clients.
 

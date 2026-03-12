@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using ApiTests.IntegrationTests.Application.Clients;
 using ApiTests.IntegrationTests.LightBDD;
+using BenefitsApi.Client.Api;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
@@ -34,9 +35,11 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
         _testAppConfigurationsProvider = testAppConfigurationsProvider;
         HttpClient httpClient = CreateClientWithLogger();
         UsersClient = RestClient.For<IUsersClient>(httpClient);
+        UsersClientV2 = new UsersApi(httpClient);
     }
 
     public IUsersClient UsersClient { get; }
+    public UsersApi UsersClientV2 { get; }
 
     public HttpClient CreateClientWithLogger()
     {

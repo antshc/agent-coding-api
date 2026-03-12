@@ -9,7 +9,7 @@ namespace Api.Data;
 // More: STR21, STR22, STR23
 public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

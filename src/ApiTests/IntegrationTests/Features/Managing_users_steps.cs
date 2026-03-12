@@ -4,6 +4,7 @@ using Api.Application.Users.Payload;
 using LightBDD.Framework;
 using ApiTests.IntegrationTests.Application.Clients;
 using ApiTests.IntegrationTests.Application;
+using BenefitsApi.Client.Api;
 using Features.Common;
 
 namespace Features;
@@ -11,6 +12,7 @@ namespace Features;
 internal class Managing_users_steps(TestWebApplicationFactory app) : Base_api_steps, IDisposable
 {
     private readonly IUsersClient _client = app.UsersClient;
+    private readonly UsersApi _clientV2 = app.UsersClientV2;
     private State<Guid> _orderId;
 
     public TestWebApplicationFactory App { get; } = app;
@@ -29,6 +31,7 @@ internal class Managing_users_steps(TestWebApplicationFactory app) : Base_api_st
     {
         var request = new CreateUserDto() { FirstName = firstName, LastName = lastName };
         Response = await _client.CreateUser(request);
+        await _clientV2.UsersPostAsync(new BenefitsApi.Client.Model.CreateUserDto(firstName, lastName));
     }
 
     public async Task When_user_get_order_details_by_send_get_order_request()
