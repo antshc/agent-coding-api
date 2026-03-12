@@ -104,11 +104,26 @@
             "scripts": [],
             "karmaConfig": "karma.conf.js"
           }
+        },
+        "e2e": {
+          "builder": "playwright-ng-schematics:playwright",
+          "options": {
+            "devServerTarget": "swebAngulas:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "swebAngulas:serve:production"
+            }
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@schematics/angular",
+      "playwright-ng-schematics"
+    ]
   }
 }
