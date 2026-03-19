@@ -53,6 +53,7 @@ internal class ConfiguredLightBddScopeAttribute : LightBddScopeAttribute
     {
         cfg.RegisterType<MsSqlDbContainerMock>(InstanceScope.Single);
         cfg.RegisterType<Managing_users_steps>(InstanceScope.Scenario);
+        cfg.RegisterType<Managing_employees_steps>(InstanceScope.Scenario);
         cfg.RegisterType<TestWebApplicationFactory>(InstanceScope.Single);
         cfg.RegisterType<TestAppConfigurations>(InstanceScope.Single);
     }

@@ -34,9 +34,11 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
         _testAppConfigurationsProvider = testAppConfigurationsProvider;
         HttpClient httpClient = CreateClientWithLogger();
         UsersClient = RestClient.For<IUsersClient>(httpClient);
+        EmployeesClient = RestClient.For<IEmployeesClient>(CreateClientWithLogger());
     }
 
     public IUsersClient UsersClient { get; }
+    public IEmployeesClient EmployeesClient { get; }
 
     public HttpClient CreateClientWithLogger()
     {
