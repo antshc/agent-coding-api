@@ -1,13 +1,9 @@
-using System;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
 using LightBDD.Framework;
-using LightBDD.Framework.Expectations;
-using LightBDD.Framework.Formatting.Values;
 using LightBDD.Framework.Parameters;
 using RestEase;
 
