@@ -27,7 +27,7 @@ var allowLocalhost = "allow localhost";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(allowLocalhost,
-        policy => { policy.WithOrigins("http://localhost:3000", "http://localhost"); });
+        policy => { policy.WithOrigins("http://localhost:3000", "http://localhost:8080", "http://localhost"); });
 });
 
 var app = builder.Build();
