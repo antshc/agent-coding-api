@@ -36,10 +36,12 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
         HttpClient httpClient = CreateClientWithLogger();
         UsersClient = RestClient.For<IUsersClient>(httpClient);
         UsersClientV2 = new UsersApi(httpClient);
+        EmployeesClient = RestClient.For<IEmployeesClient>(CreateClientWithLogger());
     }
 
     public IUsersClient UsersClient { get; }
     public UsersApi UsersClientV2 { get; }
+    public IEmployeesClient EmployeesClient { get; }
 
     public HttpClient CreateClientWithLogger()
     {

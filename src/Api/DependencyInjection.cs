@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Api.Application.Users.Queries;
 using Api.Data;
+using Api.Domain.Employees;
 using Api.Domain.Users;
 using Api.SharedKernel;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ public static class DependencyInjection
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
     }
 
     private static void ApplicationLayer(IServiceCollection services) => services.AddScoped<IUserQuery, UserQuery>();
